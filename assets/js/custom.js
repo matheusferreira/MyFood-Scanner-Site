@@ -101,7 +101,7 @@ jQuery(function($){
     jQuery('.mu-testimonial-slider').slick({
       dots: true,      
       infinite: true,
-      arrows: false,g
+      arrows: false,
       autoplay: true,
       speed: 1000,      
       cssEase: 'linear'
