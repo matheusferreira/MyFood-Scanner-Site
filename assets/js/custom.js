@@ -1,28 +1,3 @@
-/** 
-  * Template Name: SpicyX
-  * Version: 1.1  
-  * Template Scripts
-  * Author: MarkUps
-  * Author URI: http://www.markups.io/
-
-  Custom JS
-  
-
-  1. FIXED NAVBAR 
-  2. TOP SLIDER
-  3. ABOUT US ( SLICK SLIDER ) 
-  4. DATEPICKER
-  5. SHEF SLIDER ( SLICK SLIDER )
-  6. TESTIMONIAL SLIDER ( SLICK SLIDER )
-  7. COUNTER
-  8. LIGHTBOX ( FOR PORTFOLIO POPUP VIEW ) 
-  9. MENU SMOOTH SCROLLING
-  10. HOVER DROPDOWN MENU
-  11. SCROLL TOP BUTTON
-  12. PRELOADER  
-
-  
-**/
 
 jQuery(function($){
 
@@ -50,7 +25,7 @@ jQuery(function($){
       dots: false,
       infinite: true,
       arrows: true,
-      speed: 500,     
+      speed: 1000,     
       autoplay: true,
       fade: true,
       cssEase: 'linear'
@@ -84,7 +59,7 @@ jQuery(function($){
       dots: true,
       arrows: false,
       infinite: true,
-      speed: 300,
+      speed: 500,
       slidesToShow: 4,
       slidesToScroll: 2,
       autoplay: true,
@@ -126,9 +101,9 @@ jQuery(function($){
     jQuery('.mu-testimonial-slider').slick({
       dots: true,      
       infinite: true,
-      arrows: false,
+      arrows: false,g
       autoplay: true,
-      speed: 500,      
+      speed: 1000,      
       cssEase: 'linear'
     });       
 
