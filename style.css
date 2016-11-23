@@ -2569,3 +2569,10 @@ display: flex;
     border-right: none;
   }
 }
+
+video {  
+   width:100%; 
+   max-width:640px; 
+   height:auto; 
+}
+
