@@ -69,7 +69,7 @@ if(isset($_POST['email'])) {
  
     echo("<script>console.log('PHP: ".json_encode($_POST['email'])."');</script>");
  
-    $email_to = "mts.seven@gmail.com";
+    $email_to = "mtsdesigner@ymail.com";
  
     $email_subject = "New MyFoodScanner Site Message";
  
@@ -204,13 +204,13 @@ if(isset($_POST['email'])) {
 
      $url = 'https://api.sendgrid.com/';
      $user = 'azure_526d0671b57fa2464886e31c0c2d3b30@azure.com';
-     $pass = 'behappysmtp1'; 
+     $pass = 'behappysmtp1';
 
      $params = array(
           'api_user' => $user,
           'api_key' => $pass,
-          'to' => 'mts.seven@gmail.com',
-          'subject' => 'New message from MyFoodScanner',
+          'to' => $email_to,
+          'subject' => $email_subject,
           'html' => 'testing body',
           'text' => $email_message,
           'from' => $email_from,
