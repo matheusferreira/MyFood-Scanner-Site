@@ -13,6 +13,8 @@
     $human = $_POST['human'];
 			
     $body = "From: $name\n E-Mail: $email\n  Subject: $subject\n Message:\n $message";
+
+    echo 'Enviando menssagem...'
 				
     if ($_POST['submit'] && $human == '5') {				 
         if (mail ($to, $subject, $body, $from)) { 
@@ -21,7 +23,10 @@
 	       $result = '<p>Something went wrong, go back and try again!</p>'; 
 	   } 
     } else if ($_POST['submit'] && $human != '5') {
-	$result = '<p>You answered the anti-spam question incorrectly!</p>';
+	   $result = '<p>You answered the anti-spam question incorrectly!</p>';
+    }
+    else{
+        $result = '<p>Something went wrong.</p>';
     }
 ?>
 
