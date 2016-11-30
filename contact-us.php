@@ -230,6 +230,11 @@ if(isset($_POST['email'])) {
 
      // Tell curl not to return headers, but do return the response
      curl_setopt($session, CURLOPT_HEADER, false);
+
+     //Turn off SSL
+    curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($session, CURLOPT_SSL_VERIFYHOST, false);
+
      curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
      // obtain response
@@ -238,7 +243,7 @@ if(isset($_POST['email'])) {
 
      // print everything out
      print_r($response);
-     echo("<script>console.log('PHP:' ".json_encode($response)."');</script>");
+     echo("<script>console.log('PHP: ".json_encode($response)."');</script>");
      } catch(Exception $e) {
 
         trigger_error(sprintf(
