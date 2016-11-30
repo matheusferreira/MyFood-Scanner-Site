@@ -1,3 +1,8 @@
+<html>
+<head></head>
+<body>
+    
+
 <?php
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -11,11 +16,20 @@
 				
     if ($_POST['submit'] && $human == '5') {				 
         if (mail ($to, $subject, $body, $from)) { 
-	    echo '<p>Your message has been sent!</p>';
-	} else { 
-	    echo '<p>Something went wrong, go back and try again!</p>'; 
-	} 
+	    $result = '<p>Your message has been sent!</p>';
+	   } else { 
+	       $result = '<p>Something went wrong, go back and try again!</p>'; 
+	   } 
     } else if ($_POST['submit'] && $human != '5') {
-	echo '<p>You answered the anti-spam question incorrectly!</p>';
+	$result = '<p>You answered the anti-spam question incorrectly!</p>';
     }
 ?>
+
+
+<h2>Obrigado pelo seu contato!</h2>
+       <?php echo $result; ?>
+       <button onclick="history.go(-1);"> Voltar </button>
+
+</body>
+
+</html> 
