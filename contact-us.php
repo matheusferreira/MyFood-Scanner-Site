@@ -144,7 +144,7 @@ if(isset($_POST['email'])) {
  
   }
  
-  if(!preg_match($anti_spam_answer,$human)) {
+  if($human =! '5') {
  
     $error_message .= 'The Anti-Spam answer you entered does not appear to be valid.<br />';
  
