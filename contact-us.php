@@ -216,6 +216,8 @@ if(isset($_POST['email'])) {
           'from' => $email_from,
        );
 
+     print_r($params);
+     echo("<script>console.log('PHP:' ".json_encode($params)."');</script>");
      $request = $url.'api/mail.send.json';
 
      // Generate curl request
@@ -237,6 +239,7 @@ if(isset($_POST['email'])) {
 
      // print everything out
      print_r($response);
+     echo("<script>console.log('PHP:' ".json_encode($response)."');</script>");
 }
  
 ?>
