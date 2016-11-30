@@ -216,10 +216,9 @@ if(isset($_POST['email'])) {
           'from' => $email_from,
        );
 
-     print_r($params);
-    
+     
      $request = $url.'api/mail.send.json';
-
+     try {
      // Generate curl request
      $session = curl_init($request);
 
@@ -240,6 +239,14 @@ if(isset($_POST['email'])) {
      // print everything out
      print_r($response);
      echo("<script>console.log('PHP:' ".json_encode($response)."');</script>");
+     } catch(Exception $e) {
+
+        trigger_error(sprintf(
+            'Curl failed with error #%d: %s',
+            $e->getCode(), $e->getMessage()),
+            E_USER_ERROR);
+
+    }
 }
  
 ?>
