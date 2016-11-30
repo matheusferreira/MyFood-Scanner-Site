@@ -14,7 +14,7 @@
 			
     $body = "From: $name\n E-Mail: $email\n  Subject: $subject\n Message:\n $message";
 
-    echo 'Enviando menssagem...'
+    echo '<p>Enviando menssagem...</p>';
 				
     if ($_POST['submit'] && $human == '5') {				 
         if (mail ($to, $subject, $body, $from)) { 
