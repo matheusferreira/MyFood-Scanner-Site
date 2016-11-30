@@ -185,19 +185,20 @@ if(isset($_POST['email'])) {
  
      
  
-// create email headers
- 
-$headers = 'From: '.$email_from."\r\n".
- 
-'Reply-To: '.$email_from."\r\n" .
- 
-'X-Mailer: PHP/' . phpversion();
+    // create email headers
+     
+    $headers = 'From: '.$email_from."\r\n".
+     
+    'Reply-To: '.$email_from."\r\n" .
+     
+    'X-Mailer: PHP/' . phpversion();
 
-echo("<script>console.log('PHP: criação dos headers');</script>");
- 
-mail($email_to, $email_subject, $email_message, $headers);
+    echo("<script>console.log('PHP: criação dos headers');</script>");
+     
+    mail($email_to, $email_subject, $email_message, $headers);
 
-echo("<script>console.log('PHP: envio do mail');</script>");
+    echo("<script>console.log('PHP: envio do mail');</script>");
+}
  
 ?>
  
