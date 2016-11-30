@@ -8,7 +8,7 @@
 
 if(isset($_POST['email'])) {
  
-     
+    echo("<script>console.log('PHP: ".json_encode($_POST['email'])."');</script>");
  
     $email_to = "mts.seven@gmail.com";
  
@@ -47,6 +47,8 @@ if(isset($_POST['email'])) {
         died('We are sorry, but there appears to be a problem with the form you submitted.');       
  
     }
+
+    echo("<script>console.log('PHP: todos os parametros preenchidos');</script>");
  
      
  
@@ -131,8 +133,12 @@ $headers = 'From: '.$email_from."\r\n".
 'Reply-To: '.$email_from."\r\n" .
  
 'X-Mailer: PHP/' . phpversion();
+
+echo("<script>console.log('PHP: criação dos headers');</script>");
  
-mail($email_to, $email_subject, $email_message, $headers);  
+mail($email_to, $email_subject, $email_message, $headers);
+
+echo("<script>console.log('PHP: envio do mail');</script>");
  
 ?>
  
