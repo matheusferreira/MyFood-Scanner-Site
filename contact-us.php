@@ -77,6 +77,7 @@ if(isset($_POST['email'])) {
     function died($error) {
  
         // your error code can go here
+        echo "<br />"
  
         echo "We are very sorry, but there were error(s) found with the form you submitted. ";
  
@@ -124,6 +125,8 @@ if(isset($_POST['email'])) {
      
  
     $error_message = "";
+
+    $anti_spam_answer = '5'
  
     $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
  
@@ -141,7 +144,7 @@ if(isset($_POST['email'])) {
  
   }
  
-  if(!preg_match('5',$human)) {
+  if(!preg_match($anti_spam_answer,$human)) {
  
     $error_message .= 'The Anti-Spam answer you entered does not appear to be valid.<br />';
  
