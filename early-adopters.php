@@ -149,11 +149,11 @@ if(isset($_POST['email'])) {
  
   }
 
-  if($option == 0 || strcmp($option, "0") == 0) {
+  /*if($option == 0 || strcmp($option, "0") == 0) {
  
     $error_message .= 'Por favor selecione qual fase do projeto gostaria de receber notificação.<br />';
  
-  }
+  }*/
  
   if(strlen($error_message) > 0) {
  
