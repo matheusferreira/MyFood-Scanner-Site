@@ -4,7 +4,7 @@
     
 
 <?php
-    
+require("sendgrid-php/sendgrid-php.php");
 // ----------------------------------------------------------------------------------------------------
 // - Display Errors
 // ----------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ if(isset($_POST['email'])) {
  
   }
  
-  if($human =! '5') {
+  if($human != '5') {
  
     $error_message .= 'The Anti-Spam answer you entered does not appear to be valid.<br />';
  
@@ -201,10 +201,18 @@ if(isset($_POST['email'])) {
     // mail($email_to, $email_subject, $email_message, $headers);
 
     echo("<script>console.log('PHP: envio do mail');</script>");
+    Dotenv::load(__DIR__);
+    $sendgrid_apikey = getenv('azure_526d0671b57fa2464886e31c0c2d3b30@azure.com');
+    $sendgrid = new SendGrid($sendgrid_apikey);
 
      $url = 'https://api.sendgrid.com/';
      $user = 'azure_526d0671b57fa2464886e31c0c2d3b30@azure.com';
      $pass = 'behappysmtp1';
+
+     $js = array(
+          'sub' => array(':name' => array('Elmer')),
+          'filters' => array('templates' => array('settings' => array('enable' => 1, 'template_id' => $template_id)))
+        );
 
      $params = array(
           'api_user' => $user,
@@ -214,28 +222,24 @@ if(isset($_POST['email'])) {
           'html' => 'testing body',
           'text' => $email_message,
           'from' => $email_from,
+          'x-smtpapi' => json_encode($js),
        );
 
      
      $request = $url.'api/mail.send.json';
      try {
      // Generate curl request
-     $session = curl_init($request);
-
-     // Tell curl to use HTTP POST
-     curl_setopt ($session, CURLOPT_POST, true);
-
-     // Tell curl that this is the body of the POST
-     curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
-
-     // Tell curl not to return headers, but do return the response
-     curl_setopt($session, CURLOPT_HEADER, false);
-
-     //Turn off SSL
-    curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($session, CURLOPT_SSL_VERIFYHOST, false);
-
-     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+        $session = curl_init($request);
+        // Tell PHP not to use SSLv3 (instead opting for TLS)
+        curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+        curl_setopt($session, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $sendgrid_apikey));
+        // Tell curl to use HTTP POST
+        curl_setopt ($session, CURLOPT_POST, true);
+        // Tell curl that this is the body of the POST
+        curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+        // Tell curl not to return headers, but do return the response
+        curl_setopt($session, CURLOPT_HEADER, false);
+        curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
      // obtain response
      $response = curl_exec($session);
