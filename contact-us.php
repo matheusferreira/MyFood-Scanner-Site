@@ -4,7 +4,7 @@
     
 
 <?php
-require("sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php';
 // ----------------------------------------------------------------------------------------------------
 // - Display Errors
 // ----------------------------------------------------------------------------------------------------
@@ -69,11 +69,7 @@ if(isset($_POST['email'])) {
  
     echo("<script>console.log('PHP: ".json_encode($_POST['email'])."');</script>");
  
-    $email_to = "mtsdesigner@ymail.com";
- 
-    $email_subject = "New MyFoodScanner Site Message";
- 
- 
+    
     function died($error) {
  
         // your error code can go here
@@ -88,6 +84,19 @@ if(isset($_POST['email'])) {
         echo "Please go back and fix these errors.<br /><br />";
  
         die();
+ 
+    }
+
+    function success() {
+ 
+        // your error code can go here
+        echo "<br />";
+ 
+        echo "Thank you for contacting us. We will be in touch with you very soon.";
+ 
+        echo "<br />";
+ 
+        
  
     }
 
@@ -174,7 +183,6 @@ if(isset($_POST['email'])) {
  
     }
  
-     
  
     $email_message .= "First Name: ".clean_string($first_name)."\n";
  
@@ -184,74 +192,36 @@ if(isset($_POST['email'])) {
  
     $email_message .= "Message: ".clean_string($message)."\n";
  
-     
- 
-     
- 
-    // create email headers
-     
-    $headers = 'From: '.$email_from."\r\n".
-     
-    'Reply-To: '.$email_from."\r\n" .
-     
-    'X-Mailer: PHP/' . phpversion();
-
-    echo("<script>console.log('PHP: criação dos headers');</script>");
-     
-    // mail($email_to, $email_subject, $email_message, $headers);
 
     echo("<script>console.log('PHP: envio do mail');</script>");
-    Dotenv::load(__DIR__);
-    $sendgrid_apikey = getenv('azure_526d0671b57fa2464886e31c0c2d3b30@azure.com');
-    $sendgrid = new SendGrid($sendgrid_apikey);
+    
 
-     $url = 'https://api.sendgrid.com/';
-     $user = 'azure_526d0671b57fa2464886e31c0c2d3b30@azure.com';
-     $pass = 'behappysmtp1';
+    $email_to = "contato@myfoodscanner.com.br";
+    $email_subject = "New MyFoodScanner Site Message";
 
-     $js = array(
-          'sub' => array(':name' => array('Elmer')),
-          'filters' => array('templates' => array('settings' => array('enable' => 1, 'template_id' => $template_id)))
-        );
-
-     $params = array(
-          'api_user' => $user,
-          'api_key' => $pass,
-          'to' => $email_to,
-          'subject' => $email_subject,
-          'html' => 'testing body',
-          'text' => $email_message,
-          'from' => $email_from,
-          'x-smtpapi' => json_encode($js),
-       );
-
-     
+    
      $request = $url.'api/mail.send.json';
      try {
-     // Generate curl request
-        $session = curl_init($request);
-        // Tell PHP not to use SSLv3 (instead opting for TLS)
-        curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-        curl_setopt($session, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $sendgrid_apikey));
-        // Tell curl to use HTTP POST
-        curl_setopt ($session, CURLOPT_POST, true);
-        // Tell curl that this is the body of the POST
-        curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
-        // Tell curl not to return headers, but do return the response
-        curl_setopt($session, CURLOPT_HEADER, false);
-        curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+        $from = new SendGrid\Email(null, $email_from);
+        $to = new SendGrid\Email(null, $email_to);
+        $content = new SendGrid\Content("text/plain", $email_message);
+        $mail = new SendGrid\Mail($from, $email_subject, $to, $content);
 
-     // obtain response
-     $response = curl_exec($session);
-     curl_close($session);
+        $apiKey = "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";
+        $sg = new \SendGrid($apiKey);
 
-     // print everything out
-     print_r($response);
-     echo("<script>console.log('PHP: ".json_encode($response)."');</script>");
+        $response = $sg->client->mail()->send()->post($mail);
+        echo("<script>console.log('PHP: ".json_encode($response)."');</script>");
+        success();
+        //echo $response->statusCode();
+        //echo $response->headers();
+        //echo $response->body();
+     
+     
      } catch(Exception $e) {
 
         trigger_error(sprintf(
-            'Curl failed with error #%d: %s',
+            'Email failed with error #%d: %s',
             $e->getCode(), $e->getMessage()),
             E_USER_ERROR);
 
@@ -267,7 +237,7 @@ if(isset($_POST['email'])) {
  
  
 
-<h2>Thank you for contacting us. We will be in touch with you very soon.</h2>
+
        
        <button onclick="history.go(-1);"> Voltar </button>
 
