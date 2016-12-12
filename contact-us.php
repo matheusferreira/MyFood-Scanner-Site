@@ -184,13 +184,13 @@ if(isset($_POST['email'])) {
     }
  
  
-    $email_message .= "First Name: ".clean_string($first_name)."\n";
+    $email_message .= "First Name: ".clean_string($first_name)."\n <br/>";
  
-    $email_message .= "Subject: ".clean_string($subject)."\n";
+    $email_message .= "Subject: ".clean_string($subject)."\n <br/>";
  
-    $email_message .= "Email: ".clean_string($email_from)."\n";
+    $email_message .= "Email: ".clean_string($email_from)."\n <br/>"; 
  
-    $email_message .= "Message: ".clean_string($message)."\n";
+    $email_message .= "Message: ".clean_string($message)."\n <br/>";
  
 
     echo("<script>console.log('PHP: envio do mail');</script>");
@@ -203,7 +203,7 @@ if(isset($_POST['email'])) {
      try {
         $from = new SendGrid\Email(null, $email_from);
         $to = new SendGrid\Email(null, $email_to);
-        $content = new SendGrid\Content("text/plain", $email_message);
+        $content = new SendGrid\Content("text/html", $email_message);
         $mail = new SendGrid\Mail($from, $email_subject, $to, $content);
 
         $apiKey = getenv('SENDGRID_API_KEY');
