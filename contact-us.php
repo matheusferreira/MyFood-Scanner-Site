@@ -199,8 +199,7 @@ if(isset($_POST['email'])) {
     $email_to = "contato@myfoodscanner.com.br";
     $email_subject = "New MyFoodScanner Site Message";
 
-    
-     $request = $url.'api/mail.send.json';
+
      try {
         $from = new SendGrid\Email(null, $email_from);
         $to = new SendGrid\Email(null, $email_to);
@@ -211,7 +210,9 @@ if(isset($_POST['email'])) {
         $sg = new \SendGrid($apiKey);
 
         $response = $sg->client->mail()->send()->post($mail);
-        echo("<script>console.log('PHP: ".json_encode($response)."');</script>");
+        echo("<script>console.log('PHP: Response Code=> ".json_encode($response->statusCode())."');</script>");
+        echo("<script>console.log('PHP: Response Header=> ".json_encode($response->headers())."');</script>");
+        echo("<script>console.log('PHP: Response Body=> ".json_encode($response->body())."');</script>");
         success();
         //echo $response->statusCode();
         //echo $response->headers();
