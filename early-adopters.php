@@ -105,11 +105,9 @@ if(isset($_POST['email'])) {
  
     if(!isset($_POST['name']) ||
  
-        !isset($_POST['human']) ||
- 
         !isset($_POST['email']) ||
  
-        !isset($_POST['subject']) ||
+        !isset($_POST['option']) ||
  
         !isset($_POST['message'])) {
  
@@ -121,15 +119,13 @@ if(isset($_POST['email'])) {
  
      
  
-    $first_name = $_POST['name']; // required
- 
-    $human = $_POST['human']; // required
+    $name = $_POST['name']; // required
  
     $email_from = $_POST['email']; // required
  
-    $subject = $_POST['subject']; // not required
+    $option = $_POST['option']; // required
  
-    $message = $_POST['message']; // required
+    $message = $_POST['message']; // not required
  
      
  
@@ -141,27 +137,21 @@ if(isset($_POST['email'])) {
  
   if(!preg_match($email_exp,$email_from)) {
  
-    $error_message .= 'The Email Address you entered does not appear to be valid.<br />';
+    $error_message .= 'O email inserido parece ser inválido.<br />';
  
   }
  
     $string_exp = "/^[A-Za-z .'-]+$/";
  
-  if(!preg_match($string_exp,$first_name)) {
+  if(!preg_match($string_exp,$name)) {
  
-    $error_message .= 'The First Name you entered does not appear to be valid.<br />';
- 
-  }
- 
-  if($human != '5') {
- 
-    $error_message .= 'The Anti-Spam answer you entered does not appear to be valid.<br />';
+    $error_message .= 'Nome inserido parece ser inválido.<br />';
  
   }
+
+  if($option == 0 || strcmp($option, "0") == 0) {
  
-  if(strlen($message) < 2) {
- 
-    $error_message .= 'The Comments you entered do not appear to be valid.<br />';
+    $error_message .= 'Por favor selecione qual fase do projeto gostaria de receber notificação.<br />';
  
   }
  
@@ -171,7 +161,7 @@ if(isset($_POST['email'])) {
  
   }
  
-    $email_message = "Uma nova mensagem foi enviada através do formulário do site. Detalhes abaixo:\n\n<br/><br/>";
+    $email_message = "Temos um novo early adopter!!!. Detalhes abaixo:\n\n<br/><br/>";
  
      
  
@@ -184,11 +174,11 @@ if(isset($_POST['email'])) {
     }
  
  
-    $email_message .= "<b>Nome: </b>".clean_string($first_name)."\n <br/>";
- 
-    $email_message .= "<b>Assunto: </b>".clean_string($subject)."\n <br/>";
+    $email_message .= "<b>Nome: </b>".clean_string($name)."\n <br/>";
  
     $email_message .= "<b>Email: </b>".clean_string($email_from)."\n <br/><br/>"; 
+
+    $email_message .= "<b>Fase de participação: </b>".$option."\n <br/>";
  
     $email_message .= "<b>Mensagem: </b>".$message."\n <br/>";
  
@@ -197,7 +187,7 @@ if(isset($_POST['email'])) {
     
 
     $email_to = "contato@myfoodscanner.com.br";
-    $email_subject = "MyFoodScanner Site: Nova Mensagem";
+    $email_subject = "MyFoodScanner Site: Novo early adopter!";
 
 
      try {

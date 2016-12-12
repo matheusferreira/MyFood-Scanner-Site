@@ -804,31 +804,31 @@
             </div>
             <div class="mu-reservation-content">
               <p>Seja notificado no lançamento do aplicativo para o público. No momento estamos na fase de desenvolvimento (alpha), gostaria de testa-lo antes dos demais?</p>
-              <form class="mu-reservation-form">
+              <form class="mu-reservation-form" method="POST" action="early-adopters.php">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">                       
-                      <input type="text" class="form-control" placeholder="Nome completo">
+                      <input type="text" class="form-control" placeholder="Nome completo" name="name">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">                        
-                      <input type="email" class="form-control" placeholder="Email">
+                      <input type="email" class="form-control" placeholder="Email" name="email">
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <select class="form-control">
+                      <select class="form-control" name="option">
                         <option value="0">Qual fase?</option>
-                        <option value="1">Alpha (poderá conter bugs e banco de dados reduzido)</option>
-                        <option value="2">Beta (poderá conter bugs)</option>
-                        <option value="3">Public Release</option>
+                        <option value="Alpha">Alpha (poderá conter bugs e banco de dados reduzido)</option>
+                        <option value="Beta">Beta (poderá conter bugs)</option>
+                        <option value="Public Release">Public Release</option>
                       </select>                      
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <textarea class="form-control" cols="30" rows="3" placeholder="Para melhor relatório de nossos usuários, comente o modelo do seu celular e versão de Android."></textarea>
+                      <textarea class="form-control" cols="30" rows="3" placeholder="Para melhor relatório de nossos usuários, comente o modelo do seu celular e versão de Android." name="message"></textarea>
                     </div>
                   </div>
                   <button type="submit" class="mu-readmore-btn">Participar!</button>
