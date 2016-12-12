@@ -206,7 +206,7 @@ if(isset($_POST['email'])) {
         $content = new SendGrid\Content("text/plain", $email_message);
         $mail = new SendGrid\Mail($from, $email_subject, $to, $content);
 
-        $apiKey = "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";
+        $apiKey = getenv('SENDGRID_API_KEY');
         $sg = new \SendGrid($apiKey);
 
         $response = $sg->client->mail()->send()->post($mail);
