@@ -13,7 +13,7 @@ $to = new SendGrid\Email(null, "mtsdesigner@ymail.com");
 $content = new SendGrid\Content("text/plain", "Hello, Email!");
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
-$apiKey = "azure_526d0671b57fa2464886e31c0c2d3b30@azure.com";
+$apiKey = "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";
 $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($mail);
