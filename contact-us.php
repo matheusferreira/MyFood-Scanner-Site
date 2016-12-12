@@ -206,7 +206,7 @@ if(isset($_POST['email'])) {
         $content = new SendGrid\Content("text/html", $email_message);
         $mail = new SendGrid\Mail($from, $email_subject, $to, $content);
 
-        $apiKey = getenv('SENDGRID_API_KEY');
+        $apiKey = getenv('AZURE_SENDGRID_API_KEY');
         $sg = new \SendGrid($apiKey);
 
         $response = $sg->client->mail()->send()->post($mail);
